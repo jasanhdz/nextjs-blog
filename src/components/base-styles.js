@@ -16,9 +16,14 @@ const DefaultStyles = createGlobalStyle`
     color: black;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: var(--primaryFont);
     margin: 0;
+    line-height: 1.5;
   }
 `
 
