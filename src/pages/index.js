@@ -3,6 +3,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import Wrapper from '../components/common/wrapper'
 import ArticleList from '../components/home/article-list'
+import { sortByDate } from '../utils'
 
 function Index({ posts }) {
   return (
@@ -26,7 +27,7 @@ export async function getStaticProps() {
   })
   return {
     props: {
-      posts
+      posts: posts.sort(sortByDate),
     }
   }
 }

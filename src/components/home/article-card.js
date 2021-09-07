@@ -23,11 +23,18 @@ const CardStyled = styled.div`
     margin: 0;
     color: #767676;
   }
+  .date {
+    background-color: #e6e6e6;
+    width: fit-content;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
 `
 
 function ArticleCard({ article }) {
   const { frontmatter, slug } = article
-  const { cover_image, title, excerpt } = frontmatter
+  const { cover_image, title, excerpt, date } = frontmatter
   return (
     <Link href={`/blog/${slug}`}>
       <a>
@@ -35,6 +42,7 @@ function ArticleCard({ article }) {
           <div className="hero">
             <img src={cover_image} alt={title} />
          </div>
+          <p className="date">{date}</p>
           <h3 className="title">{title}</h3>
           <p className="description">{excerpt}</p>
         </CardStyled>
