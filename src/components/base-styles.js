@@ -15,6 +15,10 @@ const DefaultStyles = createGlobalStyle`
     text-decoration: none;
     color: black;
   } */
+  .anchor {
+    color: black;
+    text-decoration: none;
+  }
 
   body {
     font-family: var(--primaryFont);

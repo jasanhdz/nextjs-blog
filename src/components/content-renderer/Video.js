@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { getYoutubeURL } from '../../utils/get-youtube-url'
+import { getYoutubeIdByUrl } from '../../utils/get-youtube-url'
 
 const VideoResponsiveContainer = styled.div`
   padding-top: 56.25%;
@@ -8,7 +8,6 @@ const VideoResponsiveContainer = styled.div`
   iframe,
   object,
   video {
-    border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}px` : '0px')};
     position: absolute;
     left: 0;
     top: 0;
@@ -22,7 +21,7 @@ const VideoResponsiveContainer = styled.div`
 function VideoBlock({ data }) {
   const { external } = data
   if (external.url) {
-    const id = getYoutubeURL(external.url)
+    const id = getYoutubeIdByUrl(external.url)
     return (
       <VideoResponsiveContainer>
         <iframe
@@ -39,7 +38,7 @@ function VideoBlock({ data }) {
   }
   return (
     <div>
-      video sin procesar en fronted
+      video sin procesar en frontend
     </div>
   )
 }

@@ -3,7 +3,6 @@ import BlockOutput from '../../components/content-renderer/BlockOutput'
 import Wrapper from '../../components/common/Wrapper'
 
 function Post({ post }) {
-  console.log(post)
   return (
     <Wrapper>
       <BlockOutput chunks={post} />

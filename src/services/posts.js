@@ -1,5 +1,5 @@
 import 'isomorphic-fetch'
-const PATH = 'http://localhost:3000'
+const PATH = 'https://blog-jasanhdz.vercel.app'
 
 export async function getBooks() {
   try {

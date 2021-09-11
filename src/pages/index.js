@@ -1,11 +1,14 @@
 import { getBooks } from '../services/posts'
+import Wrapper from '../components/common/Wrapper'
+import ArticleList from '../components/blog/articles-list'
 
-function Index(props) {
-  console.log(props)
+function Index({ books }) {
+  console.log(books)
   return (
-    <div>
-     <h1>Hello world</h1>
-    </div>
+    <Wrapper>
+     <h1>Articulos ✍🏻</h1>
+     <ArticleList articles={books} />
+    </Wrapper>
   )
 }
 
@@ -15,7 +18,7 @@ export async function getStaticProps() {
   const books = await getBooks()
   return {
     props: {
-      books
+      books: books.results,
     }
   }
 }

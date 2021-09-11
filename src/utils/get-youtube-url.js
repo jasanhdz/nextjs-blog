@@ -1,8 +1,5 @@
-export function getYoutubeURL(url) {
-  if (url.includes('https://youtu.be')) {
-    const id = url.split('https://youtu.be/')[1]
-    return id
-  }
-  const params = new URLSearchParams(url)
-  return params.has('v') ? params.get('v') : 'no_exist'
+export function getYoutubeIdByUrl(url) {
+  var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+  var match = url.match(regExp);
+  return (match&&match[7].length==11)? match[7] : false;
 }

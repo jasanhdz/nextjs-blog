@@ -1,6 +1,6 @@
 import TYPES from './types';
 import PropTypes from 'prop-types'
-import ParagraphBlock from './paragraph';
+import ParagraphBlock from './Paragraph';
 import HeaderBlock from './Header';
 import VideoBlock from './Video';
 import ListBlock from './List';
@@ -14,7 +14,7 @@ function BlockOutput({ chunks }) {
       // case TYPES.CODE:
       //   return <CodeBlock key={idx} data={block.paragraph} />
       case TYPES.DELIMITER:
-        return <hr />
+        return <hr key={idx} />
       case TYPES.HEADER.H1:
         return <HeaderBlock key={idx} block={block} />
       case TYPES.HEADER.H2:
