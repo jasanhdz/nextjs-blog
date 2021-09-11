@@ -11,10 +11,10 @@ const DefaultStyles = createGlobalStyle`
     scroll-behavior: smooth;
   }
 
-  a {
+  /* a {
     text-decoration: none;
     color: black;
-  }
+  } */
 
   body {
     font-family: var(--primaryFont);

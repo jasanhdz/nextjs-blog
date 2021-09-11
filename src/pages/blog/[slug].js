@@ -1,11 +1,13 @@
 import { getBooks, getPost } from '../../services/posts'
+import BlockOutput from '../../components/content-renderer/BlockOutput'
+import Wrapper from '../../components/common/Wrapper'
 
-function Post(props) {
-  console.log(props)
+function Post({ post }) {
+  console.log(post)
   return (
-    <div>
-      <h1>Hello World SLUG</h1>
-    </div>
+    <Wrapper>
+      <BlockOutput chunks={post} />
+    </Wrapper>
   )
 }
 
