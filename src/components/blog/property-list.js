@@ -30,7 +30,7 @@ function PropertyList({ propertyList = [] }) {
           case 'person':
             const { avatar_url } = property
             return (
-              <Avatar>
+              <Avatar key={property.id}>
                 <figure>
                   <img width={30} height={30} src={avatar_url || avatarRandom} alt={property.name} />
                 </figure>

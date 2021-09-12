@@ -1,13 +1,13 @@
 import TYPES from './types';
 import PropTypes from 'prop-types'
-import ParagraphBlock from './Paragraph';
 import HeaderBlock from './Header';
 import VideoBlock from './Video';
-import ListBlock from './List';
 import ImageBlock from './Image';
-import NumberedListBlock from './NumberedList';
+import { ItemBlock, ListBlock, NumberedList, ParagraphBlock } from './Text';
+import { getNumberedList } from '../../utils/block-util';
 
-function BlockOutput({ chunks }) {
+function BlockOutput({ chunks = [] }) {
+  let pointer = 0
   return chunks.map((block, idx) => {
     const { type } = block
     switch(type.toLowerCase()) {
@@ -22,17 +22,22 @@ function BlockOutput({ chunks }) {
       case TYPES.HEADER.H3:
         return <HeaderBlock key={idx} block={block} />
       case TYPES.PARAGRAPH:
-        return <ParagraphBlock key={idx} data={block.paragraph.text} />
+        return <ParagraphBlock key={idx} block={block} />
       case TYPES.VIDEO:
         return <VideoBlock key={idx} data={block.video} />
       case TYPES.BULLETED:
         return <ListBlock key={idx} block={block} />
       case TYPES.NUMBERED_LIST:
-        return <NumberedListBlock key={idx} block={block} />
+        if (pointer === 0 || pointer < idx) {
+          const { numberedList, lastPointer } = getNumberedList({ chunks, idx })
+          pointer = lastPointer
+          return <NumberedList key={idx} blocks={numberedList} />
+        }
+        return null
       case TYPES.IMAGE:
         return <ImageBlock key={idx} block={block} />
       default:
-        return <div key={idx} />
+        return null
     }
   })
 }
