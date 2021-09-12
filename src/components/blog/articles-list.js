@@ -1,6 +1,4 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-// import ArticleCard from './article-card'
 import styled from 'styled-components'
 import ArticleCard from './article-card'
 

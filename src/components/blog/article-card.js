@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import TagList from './tag-list'
 import PropertyList from './property-list'
+import slugify from 'slugify'
 
 const CardStyled = styled.div`
   &:hover {
@@ -44,11 +45,12 @@ function getAllProperties(properties) {
 }
 
 function ArticleCard({ article }) {
-  const { id: slug, created_time, properties, cover } = article
+  const { created_time, properties, cover } = article
   const { Name, Tags, ...otherProperties } = properties
   const { multi_select: tagList  } = Tags
   const title = Name.title.length ? Name.title[0].plain_text : null
   const propertiesAll = getAllProperties(otherProperties)
+  const slug = slugify(title).toLowerCase()
   return (
     <Link href={`/blog/${slug}`}>
       <a className="anchor">
