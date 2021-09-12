@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import NProgressCSS from '../utils/nprogress'
 
 const DefaultStyles = createGlobalStyle`
   :root {
@@ -27,5 +28,10 @@ const DefaultStyles = createGlobalStyle`
 `
 
 export default function BaseStyles({ theme }) {
-  return <DefaultStyles {...theme} />
+  return (
+    <>
+      <DefaultStyles {...theme} />
+      <NProgressCSS />
+    </>
+  )
 }
