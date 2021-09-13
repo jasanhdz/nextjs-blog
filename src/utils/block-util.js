@@ -30,3 +30,12 @@ export function htmlString(block) {
   })
   return content
 }
+
+export function getAllProperties(properties) {
+  delete properties.Date
+  const propertyList = []
+  Object
+    .values(properties)
+    .forEach((property) => property[property.type].length && propertyList.push(property[property.type][0]))
+  return propertyList
+}

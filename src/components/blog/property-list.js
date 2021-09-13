@@ -22,23 +22,26 @@ const Avatar = styled.div`
 
 const avatarRandom = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80' 
 
-function PropertyList({ propertyList = [] }) {
+function PropertyList({ date, propertyList = [] }) {
   return (
     <>
-      {propertyList.map((property) => {
+      {propertyList.map((property, idx) => {
         switch (property.type) {
           case 'person':
-            const { avatar_url } = property
+            const { avatar_url, name } = property
             return (
-              <Avatar key={property.id}>
+              <div  key={idx} style={{ display: 'flex', alignItems: 'center' }}>
+              <Avatar>
                 <figure>
-                  <img width={30} height={30} src={avatar_url || avatarRandom} alt={property.name} />
+                  <img width={30} height={30} src={avatar_url || avatarRandom} alt={name} />
                 </figure>
-                <p key={property.id}>{property.name}</p>
+                <p>{name}</p>
               </Avatar>
+                <p style={{ marginLeft: 20, fontSize: 14 }}>{date}</p>
+              </div>
             ) 
           case 'text':
-            return <p key={property.id} className="description">{property.plain_text}</p>
+            return <p key={idx} className="description">{property.plain_text}</p>
           default:
             return null
         }

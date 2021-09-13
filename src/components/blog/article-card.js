@@ -5,6 +5,8 @@ import Link from 'next/link'
 import TagList from './tag-list'
 import PropertyList from './property-list'
 import slugify from 'slugify'
+import { getAllProperties } from '../../utils/block-util'
+import { getTimeAgo } from '../../utils/get-time'
 
 const CardStyled = styled.div`
   &:hover {
@@ -35,15 +37,6 @@ const CardStyled = styled.div`
   }
 `
 
-function getAllProperties(properties) {
-  delete properties.Date
-  const propertyList = []
-  Object
-    .values(properties)
-    .forEach((property) => property[property.type].length && propertyList.push(property[property.type][0]))
-  return propertyList
-}
-
 function ArticleCard({ article }) {
   const { created_time, properties, cover } = article
   const { Name, Tags, ...otherProperties } = properties
@@ -51,6 +44,7 @@ function ArticleCard({ article }) {
   const title = Name.title.length ? Name.title[0].plain_text : null
   const propertiesAll = getAllProperties(otherProperties)
   const slug = slugify(title).toLowerCase()
+  const date = getTimeAgo(new Date(created_time).getTime())
   return (
     <Link href={`/blog/${slug}`}>
       <a className="anchor">
@@ -63,7 +57,7 @@ function ArticleCard({ article }) {
           <p className="date">{new Intl.DateTimeFormat('es', {day: 'numeric', month: 'long', year: 'numeric'}).format(new Date(created_time))}</p>
           <h3 className="title">{title}</h3>
           <TagList tags={tagList} />
-          <PropertyList propertyList={propertiesAll} />
+          <PropertyList date={date} propertyList={propertiesAll} />
         </CardStyled>
       </a>
     </Link>
