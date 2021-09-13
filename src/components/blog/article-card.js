@@ -39,11 +39,12 @@ const CardStyled = styled.div`
 
 function ArticleCard({ article }) {
   const { created_time, properties, cover } = article
-  const { Name, Tags, ...otherProperties } = properties
+  const { Name, Tags, Slug, ...otherProperties } = properties
   const { multi_select: tagList  } = Tags
   const title = Name.title.length ? Name.title[0].plain_text : null
   const propertiesAll = getAllProperties(otherProperties)
-  const slug = slugify(title).toLowerCase()
+  const slugString = Slug.rich_text.length ? Slug.rich_text[0].plain_text : 'empty slug'
+  const slug = slugify(slugString)
   const date = getTimeAgo(new Date(created_time).getTime())
   return (
     <Link href={`/blog/${slug}`}>

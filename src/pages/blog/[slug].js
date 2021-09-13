@@ -1,10 +1,13 @@
-import { getBooks, getPost } from '../../services/posts'
+import Error from 'next/error'
+import { getPost } from '../../services/posts'
 import BlockOutput from '../../components/content-renderer/BlockOutput'
 import Wrapper from '../../components/common/Wrapper'
 import Description from '../../components/blog/description'
-// import slugify from 'slugify'
 
-function Post({ post, meta }) {
+function Post({ statusCode, post, meta }) {
+  if (statusCode) {
+    return <Error statusCode={statusCode} />
+  }
   return (
     <Wrapper>
       <Description meta={meta} />
@@ -15,16 +18,12 @@ function Post({ post, meta }) {
 
 export default Post
 
-// export async function getStaticPaths() {
-//   const { results } = await getBooks()
-//   const paths = results.map((book) => ({
-//     params: { slug: slugify(book.properties.Name.title[0].plain_text).toLowerCase() }
-//   }))
-//   return { paths, fallback: false }
-// }
-
-export async function getServerSideProps({ params: { slug } }, res) {
-  const post = await getPost(slug)
+export async function getServerSideProps({ params: { slug }, res }) {
+  const { data: post, statusCode } = await getPost(slug)
+  if(statusCode >= 400) {
+    res.statusCode = statusCode
+    return { props: { statusCode } }
+  }
   return {
     props: {
       post: post.results,
