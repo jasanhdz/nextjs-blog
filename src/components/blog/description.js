@@ -5,6 +5,7 @@ import PropertyList from './property-list'
 
 function Description({ meta }) {
   const { properties, created_time } = meta
+  delete properties.Slug
   const { Name, ...otherProperties } = properties
   const title = Name.title.length ? Name.title[0].plain_text : null
   const propertiesAll = getAllProperties(otherProperties)
